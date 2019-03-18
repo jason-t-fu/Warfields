@@ -1,5 +1,5 @@
 
-function ImagePromise(src, image) {
+function imagePromise(src, image) {
   // const image = new Image();
   image.src = src;
   return new Promise((resolve) => {
@@ -9,4 +9,4 @@ function ImagePromise(src, image) {
   });
 }
 
-module.exports = ImagePromise;
+module.exports = imagePromise;

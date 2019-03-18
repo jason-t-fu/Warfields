@@ -1,3 +1,4 @@
+const imagePromise = require('./imagePromise');
 
 class Map {
   constructor(context) {
@@ -19,16 +20,25 @@ class Map {
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     ];
 
-    this.mapImage = new Image();
-    this.mapImage.src = "../src/map_parts_1.png";
+    this.unitMap = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ];
+
+    this.image = new Image();
+    this.imagePromise = imagePromise("../src/map_parts_1.png", this.image);
 
     this.getTile = this.getTile.bind(this);
     this.render = this.render.bind(this);
 
-    this.mapImage.onload = () => {
-      this.render();
-    };
-    
   }
 
   getTile(col, row) {
@@ -41,7 +51,7 @@ class Map {
         var tile = this.getTile(col, row);
         if (tile !== 0) { // 0 => empty tile
           this.context.drawImage(
-            this.mapImage, // image
+            this.image, // image
             Map.imageTileLoc[tile][0], // source x
             Map.imageTileLoc[tile][1], // source y
             this.imageTileSize, // source width

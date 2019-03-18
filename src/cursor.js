@@ -1,4 +1,4 @@
-const ImagePromise = require('./imagePromise');
+const imagePromise = require('./imagePromise');
 
 class Cursor {
   constructor(context, map) {
@@ -7,7 +7,7 @@ class Cursor {
     this.x = 0;
     this.y = 0;
     this.image = new Image();
-    this.imagePromise = ImagePromise('../src/OrangeStarSprites.png', this.image);
+    this.imagePromise = imagePromise('../src/OrangeStarSprites.png', this.image);
     this.imagePosition = [286, 127];
     this.imageSize = [212, 234];
 

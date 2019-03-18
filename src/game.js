@@ -3,19 +3,17 @@ const Keyboard = require('./keyboard');
 const Cursor = require('./cursor');
 
 class Game {
-  constructor(context, player1, player2) {
+  constructor(context) {
     this.context = context;
-    this.player1 = player1;
-    this.player2 = player2;
+    this.player1 = new Player([new Infantry()], "../src/OrangeStarSprites.png");
+    this.player2 = new Player([new Infantry()], "../src/BlueMoonSprites.png");
     this.map = new Map(this.context);
     this.keyboard = new Keyboard();
     this.cursor = new Cursor(this.context, this.map);
 
     this.hold = {L: 0, "R": 0, "U": 0, "D": 0 };
-    Promise.all([this.cursor.imagePromise]).then(
-      imageArr => {
-        this.tick();
-      }
+    Promise.all([this.cursor.imagePromise, this.map.imagePromise]).then(
+      () => this.tick()
     );
   }
 
